@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15.4-alpine
+    command: postgres -c 'max_connections=200'
+    restart: always
+    networks:
+      - net
+    ports:
+      - "54324:5432"
+    environment:
+      POSTGRES_PASSWORD: "example"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "maker-checker"
+      DATABASE_HOST: "0.0.0.0"
+
+volumes:
+  api:
+
+networks:
+  net:
+    driver: bridge
